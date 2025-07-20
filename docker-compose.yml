@@ -1,0 +1,22 @@
+services:
+  api1:
+    build: ./api1
+    container_name: api1
+    ports:
+      - "6001:6001"
+    depends_on:
+      - api2
+    networks:
+      - api-network
+
+  api2:
+    build: ./api2
+    container_name: api2
+    ports:
+      - "6002:6002"
+    networks:
+      - api-network
+
+networks:
+  api-network:
+    driver: bridge
