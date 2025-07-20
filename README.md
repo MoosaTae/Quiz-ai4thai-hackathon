@@ -6,8 +6,23 @@ This project consists of two Rust microservices built with Axum:
 - **API2** (Port 6002): Processing API that handles requests and returns responses
 
 ## Architecture
-```
-User → API1 (localhost:6001) → API2 (localhost:6002) → Response back to User
+
+```mermaid
+graph LR
+    U[User] --> A1[API1<br/>Container 1<br/>:6001]
+    A1 --> A2[API2<br/>Container 2<br/>:6002]
+    A2 --> A1
+    A1 --> U
+    
+    subgraph DC[docker-compose.yml]
+        A1
+        A2
+    end
+    
+    style U fill:#e1f5fe
+    style A1 fill:#f3e5f5
+    style A2 fill:#f3e5f5
+    style DC stroke:#2196f3,stroke-width:2px
 ```
 
 ## Prerequisites
@@ -33,8 +48,8 @@ User → API1 (localhost:6001) → API2 (localhost:6002) → Response back to Us
 
 ### 1. Clone and Navigate
 ```bash
-git clone <repository-url>
-cd <project-directory>
+git clone https://github.com/MoosaTae/Quiz-ai4thai-hackathon
+cd Quiz-ai4thai-hackathon
 ```
 
 ### 2. Build and Start Services
